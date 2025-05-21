@@ -13,6 +13,7 @@ import { loginUserApi } from '../api/userApi';
 //test
 const BackgroundWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
@@ -24,249 +25,146 @@ const BackgroundWrapper = styled.div`
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 30px;
   width: 100%;
   max-width: 500px;
-  padding: 50px 50px;
-  padding-bottom: 50px;
-  background-color: ${({ theme }) => theme.colors.background};
+  padding: 10px 10px;
+  /* padding-bottom: 50px; */
+  /* background-color: ${({ theme }) => theme.colors.background}; */
   box-sizing: border-box;
   border-radius: 12px; /* 모서리를 둥글게 설정 */
-  transform: translateY(-60px); /* 컨테이너 전체를 위로 올림 */
+  transform: translateY(-20px); /* 컨테이너 전체를 위로 올림 */
 `;
 
-const Header = styled.div`
+
+const StartButton = styled.button`
+  width: 600px;
+  height: 100px;
+  padding: 36px 150px;
   display: flex;
-  align-items: center;
-  margin: 20px 0 30px 0; // TRBL
-`;
-
-const Icon = styled.img`
-  width: 60px;
-  height: 60px;
-  margin-right: 16px;
-`;
-
-const ServiceName = styled.h2`
-  font-size: 2.5rem;
+  background-color: white;
+  color: #267dff;
+  font-size: 3.5rem;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.primary};
+  border: 8px solid #1e6de6	;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+   &:hover {
+     background-color: #e6f0ff;
+   }
 `;
 
-// const Title = styled.h1`
-//   font-size: 1.8rem;
-//   color: ${({ theme }) => theme.colors.primary};
-//   margin-bottom: 20px;
-// `;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
-  background-color: ${({ theme }) => theme.colors.lightGray};
-  border-radius: 4px;
-  font-size: 1rem;
-  color: ${({ theme }) => theme.colors.textBlack}; /* 텍스트 색상 설정 */
-  box-sizing: border-box;
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors.green};
-  }
-`;
-
-const ErrorMessage = styled.span`
-  color: red;
-  font-size: 0.8rem;
-  align-self: flex-start;
-  margin-bottom: 5px;
-`;
-
-const RememberMeContainer = styled.div`
+const TopBar = styled.div`
+  position: absolute;
+  top: 20px;
+  width: 95%;
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  font-size: 0.9rem;
-  color: ${({ theme }) => theme.colors.textGray};
-  margin: 10px 0;
-`;
-
-const RememberMeLabel = styled.label`
-  display: flex;
-  align-items: center;
-`;
-
-const Checkbox = styled.input`
-  appearance: none;
-  margin-right: 5px;
-  width: 16px;
-  height: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
-  background-color: ${({ theme }) => theme.colors.lightGray};
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:checked {
-    background-color: ${({ theme }) => theme.colors.primary};
-    position: relative;
-  }
-
-  &:checked::before {
-    content: '✔';
-    color: white;
-    font-size: 12px;
-    position: absolute;
-    top: 1px;
-    left: 3px;
-  }
-`;
-
-const ForgotPassword = styled.span`
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors.primary};
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const SignUpButton = styled.button`
-  align-self: flex-middle; /* 오른쪽 정렬 */
-  font-size: 0.9rem;
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.colors.primary};
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
-  margin-top: 20px;
-`;
-
-const Button = styled.button`
-  width: 94.5%;
-  padding: 12px;
-  background-color: ${({ theme }) => theme.colors.primary};
   color: white;
+  font-size: 1.5rem;
+`;
+
+const Avatar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 230px;
+  height: 260px;
+  background-color: white;
+  border: 5px solid #1e6de6	;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  /* background-image: url('/assets/images/cam_profile.png'); */
+  background-size: cover;
+  background-position: center;
+`;
+
+const AvatarImg = styled.img`
+  width: 80%;      // 👈 원하는 크기로 조절
+  height: auto;
+  object-fit: contain;
+`;
+
+const InputArea = styled.div`
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 20px;
+  gap: px;
+  /* margin-bottom: 30px; */
+`;
+
+const Label = styled.div`
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  white-space: pre-line;
+  text-align: right;
+  flex: 1;                         // ✅ 부모의 남는 높이 다 차지
+  display: flex;                  // ✅ 자신을 flex 컨테이너로
+  align-items: center;  
+`;
+
+const Input = styled.input`
+  padding: 8px 12px;
   font-size: 1rem;
-  border: none;
   border-radius: 8px;
-  cursor: pointer;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.secondary};
-  }
+  background-color: white;
+  border: 5px solid #1e6de6	;
+  border-radius: 18px;
+  outline: none;
 `;
 
 const Login = () => {
+  const [name, setName] = useState('');
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userAtom);
   // const { fetchUser } = useFetchUser();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [, setApiError] = useState('');
 
-  // 컴포넌트가 마운트될 때 로컬스토리지에서 데이터를 가져옴
-  useEffect(() => {
-    const storedEmail = localStorage.getItem('email');
-    const storedPassword = localStorage.getItem('password');
-    if (storedEmail && storedPassword) {
-      setEmail(storedEmail);
-      setPassword(storedPassword);
-      setRememberMe(true);
-    }
-  }, []);
-
-  const handleLogin = async () => {
-    let valid = true;
-
-    if (!email.includes('@')) {
-      setEmailError('이메일을 확인해주세요');
-      valid = false;
-    } else {
-      setEmailError('');
-    }
-
-    if (password.length < 4 || password.length > 10) {
-      setPasswordError('비밀번호는 4~10자 입니다');
-      valid = false;
-    } else {
-      setPasswordError('');
-    }
-
-    if (valid) {
-      try {
-        const response = await loginUserApi({ email, password });
-        console.log('로그인 성공:', response);
-
-        // 1. 유저 데이터를 userAtom에 저장
-        setUser(response.data);
-
-        if (rememberMe) {
-          localStorage.setItem('email', email);
-          localStorage.setItem('password', password);
-        } else {
-          localStorage.removeItem('email');
-          localStorage.removeItem('password');
-        }
-        console.log('로그인 정보', { email, password });
-        // navigate(`/${user.userId}`);
-        navigate('/');
-      } catch (error: any) {
-        console.error('로그인 실패:', error.response?.data || error.message);
-        setApiError(
-          'API ERROR: 로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.',
-        );
-        setEmailError('이메일과 비밀번호를 확인해주세요.');
-      }
-    }
-  };
-
-  const handleSignUp = () => {
-    navigate('/signup');
+  const handleStart = () => {
+    navigate('/meeting/1', {
+      state: {
+        userId: 1,
+        teamId: 1,
+        nickname: name || 'guest',
+      },
+    });
   };
 
   return (
     <BackgroundWrapper>
+      <TopBar>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <img src="/assets/images/icns.png" alt="ICNS" width={24} height={24} />
+          <span>ICNS LAB</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <img src="/assets/images/ccrc.png" alt="CCRC" width={24} height={24} />
+          <span>CCRC</span>
+        </div>
+        </TopBar>
       <Container>
-        <Header>
-          <Icon src={logo} alt="A-Meet logo" />
-          <ServiceName>A-Meet</ServiceName>
-        </Header>
-
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {emailError && <ErrorMessage>{emailError}</ErrorMessage>}
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {passwordError && <ErrorMessage>{passwordError}</ErrorMessage>}
-
-        <RememberMeContainer>
-          <RememberMeLabel>
-            <Checkbox
-              type="checkbox"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
+        <Avatar>
+          <AvatarImg src="/assets/images/cam_profile.png" alt="avatar" />
+        </Avatar>
+          <InputArea>
+            <Label>{"What's\nyour\nname?"}</Label>
+            <Input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
-            Remember Me
-          </RememberMeLabel>
-          <ForgotPassword>Forgot Password?</ForgotPassword>
-        </RememberMeContainer>
-        <Spacer height={40} />
-        <Button onClick={handleLogin}>Log In</Button>
-        <SignUpButton onClick={handleSignUp}>sign up with e-mail</SignUpButton>
+          </InputArea>
+        
       </Container>
+      <StartButton onClick={handleStart}>Start AI Health Care</StartButton>
     </BackgroundWrapper>
   );
 };

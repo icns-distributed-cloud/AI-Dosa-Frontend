@@ -29,36 +29,28 @@ function AppInitializer() {
   const [user, setUser] = useRecoilState(userAtom);
   const [teams] = useRecoilState(teamsAtom);
   const { fetchUser } = useFetchUser();
-  const { fetchTeams } = useFetchTeams(user?.id || 0);
+  const { fetchTeams } = useFetchTeams(1);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const initializeApp = async () => {
       console.log('Initializing App...');
-
-      if (!user) {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-          console.log('Loading user from localStorage...');
-          setUser(JSON.parse(storedUser));
-          return;
-        }
-      }
-
-      console.log('Current User:', user);
-
       if (!user?.id) {
-        console.warn('User ID is missing. Redirecting to login.');
-        setLoading(false);
-        navigate('/login');
-        return;
-      }
+        // 👉 더미 유저 강제 세팅
+      const dummyUser = {
+        id: 1,
+        nickname: 'demo-user',
+        email: 'demo@example.com',
+        profile: null,
+      };
+
+      setUser(dummyUser);
+        }
 
       try {
-        console.log('Using UserId:', user.id);
-
-        await fetchUser(user.id);
+        await fetchUser(1);
+        await fetchTeams();
 
         if (teams.length === 0) {
           console.log('Fetching teams...');
@@ -72,17 +64,8 @@ function AppInitializer() {
     };
 
     initializeApp();
-  }, [fetchUser, fetchTeams, user?.id, navigate]);
+  }, []); 
 
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
-    }
-  }, [user]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <Routes>

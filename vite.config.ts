@@ -16,10 +16,10 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     server: {
-      https: {
-        key: fs.readFileSync('./localhost+1-key.pem'),
-        cert: fs.readFileSync('./localhost+1.pem'),
-      },
+      // https: {
+      //   key: fs.readFileSync('./localhost+1-key.pem'),
+      //   cert: fs.readFileSync('./localhost+1.pem'),
+      // },
       proxy: {
         '/api': {
           target: env.VITE_API_BASE_URL,
