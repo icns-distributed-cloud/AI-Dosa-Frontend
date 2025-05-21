@@ -12,6 +12,8 @@ import { loginUserApi } from '../api/userApi';
 
 //test
 const BackgroundWrapper = styled.div`
+  /* position: relative; ✅ 중요 */
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,6 +69,8 @@ const TopBar = styled.div`
   justify-content: space-between;
   color: white;
   font-size: 1.5rem;
+  /* z-index: 1; /* ✅ z-index 낮게 설정 : input 입력불가 문제 */  */
+
 `;
 
 const Avatar = styled.div`
@@ -118,6 +122,7 @@ const Input = styled.input`
   border-radius: 8px;
   background-color: white;
   border: 5px solid #1e6de6	;
+  color: black;
   border-radius: 18px;
   outline: none;
 `;

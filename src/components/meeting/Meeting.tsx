@@ -41,7 +41,7 @@ const BlockColumn = styled.div`
   flex-direction: column;
   gap: 18px;
   overflow: hidden;
-  width: 460px;
+  width: 900px;
 `;
 
 const Meeting = ({ meeting, teamName, teamId }: MeetingProps) => {
@@ -434,12 +434,11 @@ const Meeting = ({ meeting, teamName, teamId }: MeetingProps) => {
       />
       <MeetingBody>
         <BlockWrapper>
-          <PersonBoard participants={participants} localStream={localStream} />
           <BlockColumn>
-            <EtcBoard
+            {/* <EtcBoard
               meetingId={meeting?.meetingId ?? 0}
               leaveMeeting={leaveMeeting}
-            />
+            /> */}
             <BotBoard
               meetingId={meeting?.meetingId}
               presignedUrl={meeting.presignedUrl}
@@ -447,6 +446,7 @@ const Meeting = ({ meeting, teamName, teamId }: MeetingProps) => {
               stopRecording={stopRecording}
             />
           </BlockColumn>
+          <PersonBoard participants={participants} localStream={localStream} />
         </BlockWrapper>
       </MeetingBody>
     </>

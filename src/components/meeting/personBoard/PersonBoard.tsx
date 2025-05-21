@@ -124,8 +124,8 @@ function PersonBoard({ participants = [], localStream }: PersonBoardProps) {
   return (
     <PersonContainer>
       <RecordingIndicator>
-        <div className="dot"></div>
-        <div className="text">recording..</div>
+        {/* <div className="dot"></div>
+        <div className="text">recording..</div> */}
         {localStream && (
           <AudioUI
             autoPlay
